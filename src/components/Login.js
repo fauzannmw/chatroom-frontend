@@ -8,8 +8,13 @@ const Login = () => {
     auth.signInWithPopup(provider);
   }
   return (
-    <div>
-      <button onClick={signInWithGoogle}>Login</button>
+    <div className="grid place-content-center bg-gray-100 h-screen">
+      <button
+        className="px-8 py-3 rounded bg-yellow-400 font-semibold"
+        onClick={signInWithGoogle}
+      >
+        Login
+      </button>
     </div>
   );
 };

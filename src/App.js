@@ -7,8 +7,8 @@ import Login from "./components/Login";
 function App() {
   const [user] = useAuthState(auth);
   return (
-    <div className="App">
-      {user ? <Chat /> : <Login />} 
+    <div className="App md:hidden">
+      {user ? <Chat /> : <Login />}
     </div>
   );
 }
