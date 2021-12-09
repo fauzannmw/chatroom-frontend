@@ -28,7 +28,7 @@ const Chat = () => {
     setMsg("");
   }
   return (
-    <div className="py-3 bg-gray-100">
+    <div className="py-3 bg-gray-100 grid content-between">
       <div className="grid grid-cols-3 p-2 bg-gray-100 rounded items-center sticky top-0 ">
         <p className="col-span-2 text-xl text-indigo-600 font-semibold">
           Room : Tempat Gibah
@@ -41,10 +41,15 @@ const Chat = () => {
         </button>
       </div>
 
-      {messages.map(({ id, text, photoURL }) => (
-        <div key={id} className="grid grid-cols-5 p-2 gap-2 my-4 items-center">
+      {messages.map(({ id, text, photoURL, uid }) => (
+        <div
+          key={id}
+          className={`grid grid-cols-5 p-2 gap-2 items-center ${
+            uid === auth.currentUser.uid ? "text-gray-500" : "text-black"
+          }`}
+        >
           <img className="col-span-1 rounded-full h-14" src={photoURL} alt="" />
-          <p className="text-lg font-semibold">{text}</p>
+          <p className="col-span-4 text-xl font-semibold">{text}</p>
         </div>
       ))}
       <form
