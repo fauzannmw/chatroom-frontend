@@ -18,11 +18,12 @@ const Chat = () => {
 
   async function sendMessage(e) {
     e.preventDefault();
-    const { uid, photoURL } = auth.currentUser;
+    const { uid, photoURL, displayName } = auth.currentUser;
     await db.collection("messages").add({
       text: msg,
       photoURL,
       uid,
+      displayName,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setMsg("");
@@ -41,15 +42,39 @@ const Chat = () => {
         </button>
       </div>
 
-      {messages.map(({ id, text, photoURL, uid }) => (
-        <div
-          key={id}
-          className={`grid grid-cols-5 p-2 gap-2 items-center ${
-            uid === auth.currentUser.uid ? "text-gray-500" : "text-black"
-          }`}
-        >
-          <img className="col-span-1 rounded-full h-14" src={photoURL} alt="" />
-          <p className="col-span-4 text-xl font-semibold">{text}</p>
+      {messages.map(({ id, text, photoURL, uid, displayName }) => (
+        <div>
+          {uid === auth.currentUser.uid ? (
+            <div
+              key={id}
+              className="grid grid-cols-5 p-2 gap-2 items-center text-gray-500"
+            >
+              <img
+                className="col-span-1 rounded-full h-14"
+                src={photoURL}
+                alt=""
+              />
+              <div className="col-span-4">
+                <p className="text-xl font-semibold">{displayName}</p>
+                <p className="text-xl font-semibold">{text}</p>
+              </div>
+            </div>
+          ) : (
+            <div
+              key={id}
+              className="grid grid-cols-5 p-2 gap-2 items-center text-black"
+            >
+              <div className="col-span-4">
+                <p className="text-xl font-semibold">{displayName}</p>
+                <p className="text-xl font-semibold">{text}</p>
+              </div>
+              <img
+                className="col-span-1 rounded-full h-14"
+                src={photoURL}
+                alt=""
+              />
+            </div>
+          )}
         </div>
       ))}
       <form
