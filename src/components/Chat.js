@@ -45,12 +45,11 @@ const Chat = () => {
       {messages.map(({ id, text, photoURL, uid, displayName }) => (
         <div>
           {uid === auth.currentUser.uid ? (
-            <div
-              key={id}
-              className="grid grid-cols-5 p-2 gap-2 items-center text-black"
-            >
+            <div key={id} className="grid grid-cols-5 p-2 gap-2 items-center">
               <div className="col-span-4">
-                <p className="text-xl font-semibold">{displayName}</p>
+                <p className="text-xl text-blue-600 font-semibold">
+                  {displayName}
+                </p>
                 <p className="text-xl font-semibold">{text}</p>
               </div>
               <img
@@ -60,17 +59,16 @@ const Chat = () => {
               />
             </div>
           ) : (
-            <div
-              key={id}
-              className="grid grid-cols-5 p-2 gap-2 items-center text-gray-500"
-            >
+            <div key={id} className="grid grid-cols-5 p-2 gap-2 items-center">
               <img
                 className="col-span-1 rounded-full h-14"
                 src={photoURL}
                 alt=""
               />
               <div className="col-span-4">
-                <p className="text-xl font-semibold">{displayName}</p>
+                <p className="text-xl text-red-300 font-semibold">
+                  {displayName}
+                </p>
                 <p className="text-xl font-semibold">{text}</p>
               </div>
             </div>
