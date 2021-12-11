@@ -159,7 +159,18 @@ const Chat = () => {
                 <p className="text-xl text-red-300 font-semibold">
                   {displayName}
                 </p>
-                {!url && <p className="text-xl font-semibold">{text}</p>}{" "}
+                {!url && (
+                  <>
+                    <p className="text-xl font-semibold">{text}</p>
+                    <button
+                      type="button"
+                      onClick={() => setPinnedMsg(text)}
+                      className=" p-1.5 rounded bg-gray-200"
+                    >
+                      Pin Message
+                    </button>
+                  </>
+                )}
                 <img className="max-h-48" src={url} alt="" />
               </div>
             </div>
