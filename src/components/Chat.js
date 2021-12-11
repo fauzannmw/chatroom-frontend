@@ -96,16 +96,16 @@ const Chat = () => {
       {messages.map(({ id, text, photoURL, uid, displayName, url }) => (
         <>
           {uid === auth.currentUser.uid ? (
-            <div key={id} className="grid grid-cols-5 p-2 gap-2 items-center">
-              <div className="col-span-4">
+            <div key={id} className="grid grid-cols-5 p-2 gap-2">
+              <div className="col-span-4 grid text-right justify-items-end">
                 <p className="text-xl text-blue-600 font-semibold">
                   {displayName}
                 </p>
                 <p className="text-xl font-semibold">{text}</p>
-                <img className="max-h-56" src={url} alt="" />
+                <img className="w-96 max-h-56" src={url} alt="" />
               </div>
               <img
-                className="col-span-1 rounded-full h-14"
+                className="col-span-1 rounded-full h-14 mt-2 ml-2"
                 src={photoURL}
                 alt=""
               />
