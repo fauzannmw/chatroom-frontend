@@ -106,16 +106,17 @@ const Chat = () => {
         <p className="col-span-2 text-xl text-indigo-600 font-semibold">
           Room : Mahasiswa
         </p>
-        {showPinMsg.map(({ text }) => (
-          <p>{text}</p>
-        ))}
-
         <button
-          className="p-2 w-full justify-self-end rounded bg-yellow-400 font-semibold"
+          className="col-span-1 p-2 w-full justify-self-end rounded bg-yellow-400 font-semibold"
           onClick={() => auth.signOut()}
         >
           Logout
         </button>
+        {showPinMsg.map(({ text }) => (
+          <p className="col-span-3 text-xl text-yellow-500  font-semibold">
+            Pinned Message : {text}
+          </p>
+        ))}
       </div>
 
       {messages.map(({ id, text, photoURL, uid, displayName, url }) => (
@@ -129,7 +130,7 @@ const Chat = () => {
 
                 {!url && (
                   <>
-                    <p className=" text-xl font-semibold">{text}</p>
+                    <p className="text-xl font-semibold">{text}</p>
                     <button
                       type="button"
                       onClick={() => setPinnedMsg(text)}
