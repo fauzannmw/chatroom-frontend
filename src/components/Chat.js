@@ -38,10 +38,11 @@ const Chat = () => {
       if (image) {
         const storageRef = storage.ref(image.name);
         const result = await storageRef.put(image);
-        // const url = await result.ref.getDownloadURL();
-        // setUrl(url);
-        setUrl(await result.ref.getDownloadURL());
-        sendMessage();
+        const url = await result.ref.getDownloadURL();
+        setUrl(url);
+        setMsg(image.name);
+        // setUrl(await result.ref.getDownloadURL());
+        // sendMessage(e);
       }
     })();
   }, [image]);
@@ -51,7 +52,7 @@ const Chat = () => {
   }, [url]);
 
   async function sendMessage(e) {
-    // e.preventDefault();
+    e.preventDefault();
     const { uid, photoURL, displayName } = auth.currentUser;
     await db.collection("messages").add({
       text: msg,
@@ -91,7 +92,7 @@ const Chat = () => {
       </div>
 
       {messages.map(({ id, text, photoURL, uid, displayName, url }) => (
-        <div>
+        <>
           {uid === auth.currentUser.uid ? (
             <div key={id} className="grid grid-cols-5 p-2 gap-2 items-center">
               <div className="col-span-4">
@@ -123,7 +124,7 @@ const Chat = () => {
               </div>
             </div>
           )}
-        </div>
+        </>
       ))}
       <form
         onSubmit={sendMessage}
@@ -138,15 +139,15 @@ const Chat = () => {
           className="col-span-3 p-2 border-2 border-yellow-500 rounded font-semibold"
           placeholder="Enter A Message"
         />
-        <label className="col-span-1 p-2 border-2 border-yellow-500 rounded text-gray-500 font-semibold">
+        {/* <label className="col-span-1 p-2 border-2 border-yellow-500 rounded text-gray-500 font-semibold">
           Image
           <input type="file" className="sr-only" onChange={inputImage} />
-        </label>
-        {/* <input
+        </label> */}
+        <input
           type="file"
           className="col-span-1 p-2 border-2 border-yellow-500 rounded text-gray-500 font-semibold"
           onChange={inputImage}
-        /> */}
+        />
         <button type="submit" className="bg-yellow-400 rounded font-semibold">
           Send
         </button>
