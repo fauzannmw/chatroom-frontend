@@ -8,6 +8,9 @@ const Chat = () => {
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState("");
   const [msg, setMsg] = useState("");
+  const [pinnedMsg, setPinnedMsg] = useState("");
+  const [showPinMsg, setShowPinMsg] = useState([]);
+
   const types = ["image/png", "image/jpeg"];
 
   const scroll = useRef();
@@ -20,6 +23,16 @@ const Chat = () => {
         setMessages(snapshot.docs.map((doc) => doc.data()));
       });
     console.log(messages);
+  }, []);
+
+  useEffect(() => {
+    db.collection("pinned-message")
+      .orderBy("createdAt", "desc")
+      .limit(1)
+      .onSnapshot((snapshot) => {
+        setShowPinMsg(snapshot.docs.map((doc) => doc.data()));
+      });
+    console.log(pinnedMsg);
   }, []);
 
   // useEffect(() => {
@@ -41,9 +54,6 @@ const Chat = () => {
         const url = await result.ref.getDownloadURL();
         setUrl(url);
         setMsg(image.name);
-        // sendMessage();
-        // setUrl(await result.ref.getDownloadURL());
-        // sendMessage(e);
       }
     })();
   }, [image]);
@@ -51,6 +61,17 @@ const Chat = () => {
   useEffect(() => {
     console.log(url);
   }, [url]);
+
+  useEffect(() => {
+    if (pinnedMsg) {
+      (async function () {
+        await db.collection("pinned-message").add({
+          text: pinnedMsg,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+      })();
+    }
+  }, [pinnedMsg]);
 
   async function sendMessage(e) {
     e.preventDefault();
@@ -85,6 +106,10 @@ const Chat = () => {
         <p className="col-span-2 text-xl text-indigo-600 font-semibold">
           Room : Mahasiswa
         </p>
+        {showPinMsg.map(({ text }) => (
+          <p>{text}</p>
+        ))}
+
         <button
           className="p-2 w-full justify-self-end rounded bg-yellow-400 font-semibold"
           onClick={() => auth.signOut()}
@@ -101,7 +126,19 @@ const Chat = () => {
                 <p className="text-xl text-blue-600 font-semibold">
                   {displayName}
                 </p>
-                {!url && <p className="text-xl font-semibold">{text}</p>}
+
+                {!url && (
+                  <>
+                    <p className=" text-xl font-semibold">{text}</p>
+                    <button
+                      type="button"
+                      onClick={() => setPinnedMsg(text)}
+                      className=" p-1.5 rounded bg-gray-200"
+                    >
+                      Pin Message
+                    </button>
+                  </>
+                )}
                 <img className="max-h-56" src={url} alt="" />
               </div>
               <img
