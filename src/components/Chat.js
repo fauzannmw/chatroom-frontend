@@ -41,6 +41,7 @@ const Chat = () => {
         const url = await result.ref.getDownloadURL();
         setUrl(url);
         setMsg(image.name);
+        // sendMessage();
         // setUrl(await result.ref.getDownloadURL());
         // sendMessage(e);
       }
@@ -64,6 +65,7 @@ const Chat = () => {
     });
     setMsg("");
     setImage("");
+    setUrl("");
     scroll.current.scrollIntoView({ behavior: "smooth" });
   }
 
@@ -139,15 +141,15 @@ const Chat = () => {
           className="col-span-3 p-2 border-2 border-yellow-500 rounded font-semibold"
           placeholder="Enter A Message"
         />
-        {/* <label className="col-span-1 p-2 border-2 border-yellow-500 rounded text-gray-500 font-semibold">
+        <label className="col-span-1 p-2 border-2 border-yellow-500 rounded text-gray-500 font-semibold">
           Image
           <input type="file" className="sr-only" onChange={inputImage} />
-        </label> */}
-        <input
+        </label>
+        {/* <input
           type="file"
           className="col-span-1 p-2 border-2 border-yellow-500 rounded text-gray-500 font-semibold"
           onChange={inputImage}
-        />
+        /> */}
         <button type="submit" className="bg-yellow-400 rounded font-semibold">
           Send
         </button>
