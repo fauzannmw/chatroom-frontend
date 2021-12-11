@@ -140,7 +140,7 @@ const Chat = () => {
                     </button>
                   </>
                 )}
-                <img className="max-h-56" src={url} alt="" />
+                <img className="max-h-56 rounded" src={url} alt="" />
               </div>
               <img
                 className="col-span-1 rounded-full h-14 mt-2"
@@ -171,7 +171,7 @@ const Chat = () => {
                     </button>
                   </>
                 )}
-                <img className="max-h-48" src={url} alt="" />
+                <img className="max-h-48 rounded" src={url} alt="" />
               </div>
             </div>
           )}
