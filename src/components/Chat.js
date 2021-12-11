@@ -101,7 +101,7 @@ const Chat = () => {
                 <p className="text-xl text-blue-600 font-semibold">
                   {displayName}
                 </p>
-                <p className="text-xl font-semibold">{text}</p>
+                {!url && <p className="text-xl font-semibold">{text}</p>}
                 <img className="max-h-56" src={url} alt="" />
               </div>
               <img
@@ -121,7 +121,7 @@ const Chat = () => {
                 <p className="text-xl text-red-300 font-semibold">
                   {displayName}
                 </p>
-                <p className="text-xl font-semibold">{text}</p>
+                {!url && <p className="text-xl font-semibold">{text}</p>}{" "}
                 <img className="max-h-48" src={url} alt="" />
               </div>
             </div>
