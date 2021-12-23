@@ -35,17 +35,6 @@ const Chat = () => {
     console.log(pinnedMsg);
   }, []);
 
-  // useEffect(() => {
-  //   if (image) {
-  //     const storageRef = storage.ref(image.name);
-  //     storageRef.put(image).on("state_changed", async () => {
-  //       const url = await storageRef.getDownloadURL();
-  //       setUrl(url);
-  //     });
-  //   }
-  //   console.log(url);
-  // }, [image]);
-
   useEffect(() => {
     (async function () {
       if (image) {
@@ -104,7 +93,7 @@ const Chat = () => {
     <div className="py-3 bg-gray-100 grid content-between">
       <div className="grid grid-cols-3 p-2 bg-gray-100 rounded items-center sticky top-0 ">
         <p className="col-span-2 text-xl text-indigo-600 font-semibold">
-          Room : Mahasiswa
+          Room : General
         </p>
         <button
           className="col-span-1 p-2 w-full justify-self-end rounded bg-yellow-400 font-semibold"
@@ -113,7 +102,7 @@ const Chat = () => {
           Logout
         </button>
         {showPinMsg.map(({ text }) => (
-          <p className="col-span-3 text-xl text-yellow-500  font-semibold">
+          <p className="col-span-3 text-xl text-red-300  font-semibold">
             Pinned Message : {text}
           </p>
         ))}
@@ -140,7 +129,12 @@ const Chat = () => {
                     </button>
                   </>
                 )}
-                <img className="max-h-56 rounded" src={url} alt="" />
+                <img
+                  className="max-h-56 rounded"
+                  src={url}
+                  alt=""
+                  layout="responsive"
+                />
               </div>
               <img
                 className="col-span-1 rounded-full h-14 mt-2"
@@ -171,7 +165,12 @@ const Chat = () => {
                     </button>
                   </>
                 )}
-                <img className="max-h-48 rounded" src={url} alt="" />
+                <img
+                  className="max-h-48 rounded"
+                  src={url}
+                  alt=""
+                  layout="responsive"
+                />
               </div>
             </div>
           )}
